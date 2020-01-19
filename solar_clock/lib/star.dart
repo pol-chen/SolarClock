@@ -4,12 +4,12 @@ abstract class Star extends StatelessWidget {
   const Star({
     @required this.color,
     @required this.radius,
-    @required this.radian
+    @required this.center,
   })  : assert(color != null),
         assert(radius != null),
-        assert(radian != null);
+        assert(center != null);
 
   final Color color;
   final double radius;
-  final double radian;
+  final Offset center;
 }

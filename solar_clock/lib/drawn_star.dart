@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import 'star.dart';
@@ -8,14 +6,14 @@ class DrawnStar extends Star {
   const DrawnStar({
     @required Color color,
     @required double radius,
-    @required double radian,
+    @required Offset center,
   })  : assert(color != null),
         assert(radius != null),
-        assert(radian != null),
+        assert(center != null),
         super(
           color: color,
           radius: radius,
-          radian: radian,
+          center: center,
         );
 
   final distance = 10;
@@ -28,7 +26,7 @@ class DrawnStar extends Star {
           painter: _StarPainter(
             color: color,
             radius: radius,
-            radian: radian,
+            center: center,
           ),
         ),
       ),
@@ -40,24 +38,20 @@ class _StarPainter extends CustomPainter {
   _StarPainter({
     @required this.color,
     @required this.radius,
-    @required this.radian,
+    @required this.center,
   })  : assert(color != null),
         assert(radius != null),
-        assert(radian != null);
+        assert(center != null);
 
   Color color;
   double radius;
-  double radian;
+  Offset center;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final canvasCenter = (Offset.zero & size).center;
-    final relativeCenter = canvasCenter;
-    final distance = 100.0;
-    final circleCenter = relativeCenter + Offset.fromDirection(radian - pi / 2.0, distance);
     final paint = Paint()
       ..color = color;
-    canvas.drawCircle(circleCenter, radius, paint);
+    canvas.drawCircle(center, radius, paint);
   }
 
   @override

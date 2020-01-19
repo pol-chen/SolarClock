@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
@@ -21,6 +22,7 @@ class _SolarClockState extends State<SolarClock> {
   var _now = DateTime.now();
   var _condition = '';
   Timer _timer;
+  GlobalKey _key = GlobalKey();
 
   @override
   void initState() {
@@ -72,6 +74,39 @@ class _SolarClockState extends State<SolarClock> {
     final sunColor = Color(0xFFD2E3FC);
     final earthColor = Color(0xFF1113FC);
     final moonColor = Color(0xF201030C);
+ 
+    final size = MediaQuery.of(super.context).size;
+
+    final anchorRadius = 50.0;
+    final anchorCenter = size.center(Offset.zero);
+
+    final hourRadius = 20.0;
+    final hourDistance = size.height / 2.0 - hourRadius - 30.0;
+    final hourRadian = _now.hour * radians(360 / 12) + _now.minute * radians(360 / 12 / 60) + _now.second * radians(360 / 12 / 60 / 60) - pi / 2.0;
+    final hourCenter = anchorCenter + Offset.fromDirection(hourRadian, hourDistance);
+
+    final minuteRadius = 10.0;
+    final minuteDistance = hourRadius + 10.0 + minuteRadius;
+    final minuteRadian = _now.minute * radians(360 / 60) + _now.second * radians(360 / 60 / 60) - pi / 2.0;
+    final minuteCenter = hourCenter + Offset.fromDirection(minuteRadian, minuteDistance);
+
+    final sun = DrawnStar(
+      color: sunColor,
+      radius: anchorRadius,
+      center: anchorCenter,
+    );
+
+    final earth = DrawnStar(
+      color: earthColor,
+      radius: hourRadius,
+      center: hourCenter,
+    );
+
+    final moon = DrawnStar(
+      color: moonColor,
+      radius: minuteRadius,
+      center: minuteCenter,
+    );
     
     return Semantics.fromProperties(
       properties: SemanticsProperties(
@@ -83,21 +118,9 @@ class _SolarClockState extends State<SolarClock> {
         child: Stack(
           children: <Widget>[
             Text('$time $_condition'),
-            DrawnStar(
-              color: sunColor,
-              radius: 50,
-              radian: _now.hour * radians(360 / 12) + _now.minute * radians(360 / 12 / 60) + _now.second * radians(360 / 12 / 60 / 60),
-            ),
-            DrawnStar(
-              color: earthColor,
-              radius: 25,
-              radian: _now.minute * radians(360 / 60) + _now.second * radians(360 / 60 / 60),
-            ),
-            DrawnStar(
-              color: moonColor,
-              radius: 10,
-              radian: _now.second * radians(360 / 60),
-            ),
+            sun,
+            earth,
+            moon,
           ],
         ),
       ),
