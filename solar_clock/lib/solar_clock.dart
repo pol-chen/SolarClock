@@ -73,20 +73,20 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
     if (_size != null) {
       final time = DateFormat.Hms().format(DateTime.now());
 
-      final backgroundColor = Color(0xFFFFFFFF);
-      final sunColor = Color(0xFFD2E3FC);
-      final earthColor = Color(0xFF1113FC);
-      final moonColor = Color(0xF201030C);
+      final backgroundColor = Color(0xFF152440);
+      final sunColor = Color(0xFFFF5020);
+      final earthColor = Color(0xFF008FAF);
+      final moonColor = Color(0xFFFEE050);
   
-      final anchorRadius = 50.0;
+      final anchorRadius = 48.0;
       final anchorCenter = _size.center(Offset.zero);
 
-      final hourRadius = 20.0;
+      final hourRadius = 18.0;
       final hourDistance = _size.height / 2.0 - hourRadius - 30.0;
       final hourRadian = _now.hour * radians(360 / 12) + _now.minute * radians(360 / 12 / 60) + _now.second * radians(360 / 12 / 60 / 60) - pi / 2.0;
       final hourCenter = anchorCenter + Offset.fromDirection(hourRadian, hourDistance);
 
-      final minuteRadius = 10.0;
+      final minuteRadius = 8.0;
       final minuteDistance = hourRadius + 10.0 + minuteRadius;
       final minuteRadian = _now.minute * radians(360 / 60) + _now.second * radians(360 / 60 / 60) - pi / 2.0;
       final minuteCenter = hourCenter + Offset.fromDirection(minuteRadian, minuteDistance);
