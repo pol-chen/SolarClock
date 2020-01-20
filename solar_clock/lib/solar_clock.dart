@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:intl/intl.dart';
+import 'package:solar_clock/flare_star.dart';
 import 'package:vector_math/vector_math_64.dart' show radians;
 import 'package:after_layout/after_layout.dart';
 
@@ -69,7 +70,7 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
 
   @override
   Widget build(BuildContext context) {
-    // print('build $_hasFirstLayout');
+    // print('build');
     if (_size != null) {
       final time = DateFormat.Hms().format(DateTime.now());
 
@@ -82,7 +83,7 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
       final anchorCenter = _size.center(Offset.zero);
 
       final hourRadius = 18.0;
-      final hourDistance = _size.height / 2.0 - hourRadius - 30.0;
+      final hourDistance = _size.height / 2.0 - hourRadius - 20.0;
       final hourRadian = _now.hour * radians(360 / 12) + _now.minute * radians(360 / 12 / 60) + _now.second * radians(360 / 12 / 60 / 60) - pi / 2.0;
       final hourCenter = anchorCenter + Offset.fromDirection(hourRadian, hourDistance);
 
@@ -91,20 +92,38 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
       final minuteRadian = _now.minute * radians(360 / 60) + _now.second * radians(360 / 60 / 60) - pi / 2.0;
       final minuteCenter = hourCenter + Offset.fromDirection(minuteRadian, minuteDistance);
 
-      final sun = DrawnStar(
+      final sunDrawn = DrawnStar(
         color: sunColor,
         radius: anchorRadius,
         center: anchorCenter,
       );
 
-      final earth = DrawnStar(
+      final sun = FlareStar(
+        asset: "assets/sun.flr",
+        radius: anchorRadius,
+        center: anchorCenter,
+      );
+
+      final earthDrawn = DrawnStar(
         color: earthColor,
         radius: hourRadius,
         center: hourCenter,
       );
 
-      final moon = DrawnStar(
+      final earth = FlareStar(
+        asset: "assets/earth.flr",
+        radius: hourRadius,
+        center: hourCenter,
+      );
+
+      final moonDrawn = DrawnStar(
         color: moonColor,
+        radius: minuteRadius,
+        center: minuteCenter,
+      );
+
+      final moon = FlareStar(
+        asset: "assets/moon.flr",
         radius: minuteRadius,
         center: minuteCenter,
       );
@@ -120,8 +139,11 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
             children: <Widget>[
               Text('$time $_condition'),
               sun,
+              sunDrawn,
               earth,
+              earthDrawn,
               moon,
+              moonDrawn,
             ],
           ),
         ),

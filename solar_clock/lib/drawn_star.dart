@@ -4,19 +4,18 @@ import 'star.dart';
 
 class DrawnStar extends Star {
   const DrawnStar({
-    @required Color color,
+    @required this.color,
     @required double radius,
     @required Offset center,
   })  : assert(color != null),
         assert(radius != null),
         assert(center != null),
         super(
-          color: color,
           radius: radius,
           center: center,
         );
 
-  final distance = 10;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
