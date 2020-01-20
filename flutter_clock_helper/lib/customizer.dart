@@ -179,7 +179,7 @@ class _ClockCustomizerState extends State<ClockCustomizer> {
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(
-              width: 2,
+              width: 0,
               color: Theme.of(context).unselectedWidgetColor,
             ),
           ),
