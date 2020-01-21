@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class Twinkle {
-  Twinkle({
+  const Twinkle({
     @required this.left,
     @required this.top,
     @required this.type
