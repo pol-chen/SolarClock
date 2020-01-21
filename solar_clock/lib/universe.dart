@@ -27,7 +27,7 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
   Size _size;
 
   List<Twinkle> twinkleList;
-  final int twinkleCount = 40;
+  final int twinkleCount = 60;
 
   AnimationController _twinkleController;
   List<Animation> _fadeAnimations;
@@ -62,7 +62,7 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
   }
 
   void initTwinkleAnimation() {
-    _twinkleController = AnimationController(vsync: this, duration: Duration(milliseconds: 2000));
+    _twinkleController = AnimationController(vsync: this, duration: Duration(milliseconds: 8000));
 
     // Fade animations
     List<double> tweens = [0.0, 1.0];
@@ -78,7 +78,7 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
       _fadeAnimations.add(fadeAnimation);
     }
     
-    _sizeAnimation = Tween(begin: 0.0, end: 5.0)
+    _sizeAnimation = Tween(begin: 0.0, end: 3.5)
         .animate(CurvedAnimation(parent: _twinkleController, curve: Interval(0.0, 0.5)));
     _sizeAnimation.addListener(() {
       setState(() {});
@@ -135,8 +135,8 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
       top: top,
       child: Container(
         alignment: FractionalOffset.center,
-        width: 10.0,
-        height: 10.0,
+        width: 10,
+        height: 10,
         child: Opacity(
           child: Icon(
             Icons.lens,
