@@ -75,7 +75,7 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
       _fadeAnimations.add(fadeAnimation);
     }
 
-    _sizeAnimation = Tween(begin: 0.0, end: 5.0).animate(
+    _sizeAnimation = Tween(begin: 0.0, end: 4.0).animate(
         CurvedAnimation(parent: _twinkleController, curve: Interval(0.0, 0.5)));
     _sizeAnimation.addListener(() {
       setState(() {});
