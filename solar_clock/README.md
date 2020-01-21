@@ -2,7 +2,7 @@
 
 Solar Clock uses a metaphor of solar system to represent the time. The direction from the sun to the earth is the hour hand; the direction from the earth to the moon is the minute hand. 
 
-<img src='screenshot.png'>
+<img src='solar_clock.png'>
 
 ## Animation
 
