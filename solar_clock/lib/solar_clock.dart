@@ -6,6 +6,7 @@ import 'package:flutter/semantics.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:intl/intl.dart';
 import 'package:solar_clock/flare_star.dart';
+import 'package:solar_clock/universe.dart';
 import 'package:vector_math/vector_math_64.dart' show radians;
 import 'package:after_layout/after_layout.dart';
 
@@ -137,6 +138,7 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
           color: backgroundColor,
           child: Stack(
             children: <Widget>[
+              Universe(size: _size),
               Text('$time $_condition'),
               sun,
               sunDrawn,
