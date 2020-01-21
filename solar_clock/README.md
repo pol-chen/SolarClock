@@ -14,4 +14,4 @@ Solar Clock includes semantic labels to support accessibility, allowing a screen
 
 ## License
 
-All code in `solar_clock` are licensed under MIT license; assets are licensed under CC BY 4.0 license.
+All code are licensed under MIT license; assets are licensed under CC BY 4.0 license.

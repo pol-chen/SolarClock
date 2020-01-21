@@ -1,15 +1,17 @@
-# Flutter Clock
+# Solar Clock
 
-Welcome to Flutter Clock!
+Solar Clock uses a metaphor of solar system to represent the time. The direction from the sun to the earth is the hour hand; the direction from the earth to the moon is the minute hand. 
 
-See [flutter.dev/clock](https://flutter.dev/clock) for how to get started, submission requirements, contest rules, and FAQs.
+<img src='solar_clock/screenshot.png'>
 
-See a [live demo](https://maryx.github.io/flutter_clock) with Flutter for Web!
+## Animation
 
-Example [Analog Clock](analog_clock)
+Solar Clock uses Flare to create the animation for the sun, the earth and the moon; the background universe uses AnimationController to create the twinkle effect and the background animating gradient effect.
 
-<img src='analog_clock/analog.gif' width='350'>
+## Accessibility
 
-Example [Digital Clock](digital_clock)
+Solar Clock includes semantic labels to support accessibility, allowing a screen reader to speak out the time.
 
-<img src='digital_clock/digital.gif' width='350'>
+## License
+
+All code are licensed under MIT license; assets are licensed under CC BY 4.0 license.
