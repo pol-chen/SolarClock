@@ -48,8 +48,7 @@ class _StarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color;
+    final paint = Paint()..color = color;
     canvas.drawCircle(center, radius, paint);
   }
 

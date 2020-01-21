@@ -19,7 +19,8 @@ class SolarClock extends StatefulWidget {
   _SolarClockState createState() => _SolarClockState();
 }
 
-class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarClock> {
+class _SolarClockState extends State<SolarClock>
+    with AfterLayoutMixin<SolarClock> {
   var _now = DateTime.now();
   var _condition = '';
   Timer _timer;
@@ -61,9 +62,8 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
       _now = DateTime.now();
       // Update time once per second.
       _timer = Timer(
-        Duration(seconds: 1) - Duration(milliseconds: _now.millisecond),
-        _updateTime
-      );
+          Duration(seconds: 1) - Duration(milliseconds: _now.millisecond),
+          _updateTime);
     });
   }
 
@@ -73,19 +73,26 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
       final time = DateFormat.Hms().format(DateTime.now());
 
       final ratio = _size.height / 414.0;
-  
+
       final anchorRadius = 48.0 * ratio;
       final anchorCenter = _size.center(Offset.zero);
 
       final hourRadius = 18.0 * ratio;
       final hourDistance = _size.height / 2.0 - hourRadius - 20.0 * ratio;
-      final hourRadian = _now.hour * radians(360 / 12) + _now.minute * radians(360 / 12 / 60) + _now.second * radians(360 / 12 / 60 / 60) - pi / 2.0;
-      final hourCenter = anchorCenter + Offset.fromDirection(hourRadian, hourDistance);
+      final hourRadian = _now.hour * radians(360 / 12) +
+          _now.minute * radians(360 / 12 / 60) +
+          _now.second * radians(360 / 12 / 60 / 60) -
+          pi / 2.0;
+      final hourCenter =
+          anchorCenter + Offset.fromDirection(hourRadian, hourDistance);
 
       final minuteRadius = 8.0 * ratio;
       final minuteDistance = hourRadius + 10.0 * ratio + minuteRadius;
-      final minuteRadian = _now.minute * radians(360 / 60) + _now.second * radians(360 / 60 / 60) - pi / 2.0;
-      final minuteCenter = hourCenter + Offset.fromDirection(minuteRadian, minuteDistance);
+      final minuteRadian = _now.minute * radians(360 / 60) +
+          _now.second * radians(360 / 60 / 60) -
+          pi / 2.0;
+      final minuteCenter =
+          hourCenter + Offset.fromDirection(minuteRadian, minuteDistance);
 
       final sun = FlareStar(
         asset: "assets/sun.flr",
@@ -104,7 +111,7 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
         radius: minuteRadius,
         center: minuteCenter,
       );
-      
+
       // Use Semantics to support accessibility, allowing screen reader to speak out the time.
       return Semantics.fromProperties(
         properties: SemanticsProperties(
