@@ -69,7 +69,6 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
 
   @override
   Widget build(BuildContext context) {
-    // print('build');
     if (_size != null) {
       final time = DateFormat.Hms().format(DateTime.now());
   
@@ -107,7 +106,7 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
       // Use Semantics to support accessibility, allowing screen reader to speak out the time.
       return Semantics.fromProperties(
         properties: SemanticsProperties(
-          label: 'Solar Clock with time $time',
+          label: 'Solar Clock with time $time weather $_condition',
           value: time,
         ),
         child: Container(
@@ -134,6 +133,5 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
     });
   }
 
-  // TODO: Handle afterRotateCase
   // TODO: Handle screen size to star radius
 }

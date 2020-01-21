@@ -42,7 +42,7 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
 
     _size = widget.size;
 
-    // Init twinkles
+    // Init twinkles.
     _twinkleList = List();
     for (int i = 0; i < _twinkleCount; i++) {
       _twinkleList.add(Twinkle(
@@ -56,15 +56,15 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
     initTwinkleAnimation();
     initBackgroundAnimation();
 
-    // Start animations
+    // Start animations.
     _twinkleController.forward();
     _backgroundController.forward();
   }
 
   void initTwinkleAnimation() {
-    _twinkleController = AnimationController(vsync: this, duration: Duration(milliseconds: 8000));
+    _twinkleController = AnimationController(vsync: this, duration: Duration(milliseconds: 6000));
 
-    // Fade animations
+    // Fade animations.
     List<double> tweens = [0.0, 1.0];
     List<Interval> intervals = [Interval(0.0, 0.5), Interval(0.5, 1.0)];
     int count = 4;
