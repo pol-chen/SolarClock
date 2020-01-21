@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_clock_helper/model.dart';
@@ -8,9 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:solar_clock/flare_star.dart';
 import 'package:solar_clock/universe.dart';
 import 'package:vector_math/vector_math_64.dart' show radians;
-import 'package:after_layout/after_layout.dart';
-
-import 'drawn_star.dart';
 
 class SolarClock extends StatefulWidget {
   const SolarClock(this.model);
@@ -74,11 +72,6 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
     // print('build');
     if (_size != null) {
       final time = DateFormat.Hms().format(DateTime.now());
-
-      final backgroundColor = Color(0xFF152440);
-      final sunColor = Color(0xFFFF5020);
-      final earthColor = Color(0xFF008FAF);
-      final moonColor = Color(0xFFFEE050);
   
       final anchorRadius = 48.0;
       final anchorCenter = _size.center(Offset.zero);
@@ -93,22 +86,10 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
       final minuteRadian = _now.minute * radians(360 / 60) + _now.second * radians(360 / 60 / 60) - pi / 2.0;
       final minuteCenter = hourCenter + Offset.fromDirection(minuteRadian, minuteDistance);
 
-      final sunDrawn = DrawnStar(
-        color: sunColor,
-        radius: anchorRadius,
-        center: anchorCenter,
-      );
-
       final sun = FlareStar(
         asset: "assets/sun.flr",
         radius: anchorRadius,
         center: anchorCenter,
-      );
-
-      final earthDrawn = DrawnStar(
-        color: earthColor,
-        radius: hourRadius,
-        center: hourCenter,
       );
 
       final earth = FlareStar(
@@ -117,35 +98,26 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
         center: hourCenter,
       );
 
-      final moonDrawn = DrawnStar(
-        color: moonColor,
-        radius: minuteRadius,
-        center: minuteCenter,
-      );
-
       final moon = FlareStar(
         asset: "assets/moon.flr",
         radius: minuteRadius,
         center: minuteCenter,
       );
       
+      // Use Semantics to support accessibility, allowing screen reader to speak out the time.
       return Semantics.fromProperties(
         properties: SemanticsProperties(
-          label: 'Solar clock with time $time',
+          label: 'Solar Clock with time $time',
           value: time,
         ),
         child: Container(
-          color: backgroundColor,
+          color: Color(0xFF152440),
           child: Stack(
             children: <Widget>[
               Universe(size: _size),
-              Text('$time $_condition'),
               sun,
-              sunDrawn,
               earth,
-              earthDrawn,
               moon,
-              moonDrawn,
             ],
           ),
         ),

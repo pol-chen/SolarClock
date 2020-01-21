@@ -138,12 +138,12 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
         width: 10,
         height: 10,
         child: Opacity(
+          opacity: _fadeAnimations[type].value,
           child: Icon(
             Icons.lens,
             color: Colors.white,
             size: _sizeAnimation.value,
           ),
-          opacity: _fadeAnimations[type].value,
         ),
       ),
     );
