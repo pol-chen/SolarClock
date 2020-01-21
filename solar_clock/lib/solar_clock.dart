@@ -23,7 +23,7 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
   var _now = DateTime.now();
   var _condition = '';
   Timer _timer;
-  var _size;
+  Size _size;
 
   @override
   void initState() {
@@ -71,17 +71,19 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
   Widget build(BuildContext context) {
     if (_size != null) {
       final time = DateFormat.Hms().format(DateTime.now());
+
+      final ratio = _size.height / 414.0;
   
-      final anchorRadius = 48.0;
+      final anchorRadius = 48.0 * ratio;
       final anchorCenter = _size.center(Offset.zero);
 
-      final hourRadius = 18.0;
-      final hourDistance = _size.height / 2.0 - hourRadius - 20.0;
+      final hourRadius = 18.0 * ratio;
+      final hourDistance = _size.height / 2.0 - hourRadius - 20.0 * ratio;
       final hourRadian = _now.hour * radians(360 / 12) + _now.minute * radians(360 / 12 / 60) + _now.second * radians(360 / 12 / 60 / 60) - pi / 2.0;
       final hourCenter = anchorCenter + Offset.fromDirection(hourRadian, hourDistance);
 
-      final minuteRadius = 8.0;
-      final minuteDistance = hourRadius + 10.0 + minuteRadius;
+      final minuteRadius = 8.0 * ratio;
+      final minuteDistance = hourRadius + 10.0 * ratio + minuteRadius;
       final minuteRadian = _now.minute * radians(360 / 60) + _now.second * radians(360 / 60 / 60) - pi / 2.0;
       final minuteCenter = hourCenter + Offset.fromDirection(minuteRadian, minuteDistance);
 
@@ -132,6 +134,4 @@ class _SolarClockState extends State<SolarClock> with AfterLayoutMixin<SolarCloc
       _size = renderBox.size;
     });
   }
-
-  // TODO: Handle screen size to star radius
 }
