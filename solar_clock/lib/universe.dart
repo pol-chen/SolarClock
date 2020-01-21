@@ -117,15 +117,15 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final linearGradient = LinearGradient(
+      colors: [_colorAnimationStart.value, _colorAnimationEnd.value],
+      begin: FractionalOffset(0.0, 0.5),
+      end: FractionalOffset(0.5, 1.0),
+    );
     return Container(
         width: _size.width,
         height: _size.height,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: [_colorAnimationStart.value, _colorAnimationEnd.value],
-          begin: FractionalOffset(0.0, 0.5),
-          end: FractionalOffset(0.5, 1.0),
-        )),
+        decoration: BoxDecoration(gradient: linearGradient),
         child: twinkleStack());
   }
 
