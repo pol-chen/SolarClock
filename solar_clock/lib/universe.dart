@@ -26,8 +26,8 @@ class Universe extends StatefulWidget {
 class _UniverseState extends State<Universe> with TickerProviderStateMixin {
   Size _size;
 
-  List<Twinkle> twinkleList;
-  final int twinkleCount = 60;
+  List<Twinkle> _twinkleList;
+  final int _twinkleCount = 60;
 
   AnimationController _twinkleController;
   List<Animation> _fadeAnimations;
@@ -43,9 +43,9 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
     _size = widget.size;
 
     // Init twinkles
-    twinkleList = List();
-    for (int i = 0; i < twinkleCount; i++) {
-      twinkleList.add(Twinkle(
+    _twinkleList = List();
+    for (int i = 0; i < _twinkleCount; i++) {
+      _twinkleList.add(Twinkle(
           left: Random().nextDouble() * _size.width,
           top: Random().nextDouble() * _size.height,
           type: Random().nextInt(4)
@@ -151,8 +151,8 @@ class _UniverseState extends State<Universe> with TickerProviderStateMixin {
 
   Widget twinkleStack() {
     List<Widget> widgets = List();
-    for (int i = 0; i < twinkleCount; i++) {
-      widgets.add(twinkleWidget(twinkleList[i].left, twinkleList[i].top, twinkleList[i].type));
+    for (int i = 0; i < _twinkleCount; i++) {
+      widgets.add(twinkleWidget(_twinkleList[i].left, _twinkleList[i].top, _twinkleList[i].type));
     }
     return Stack(children: widgets);
   }
